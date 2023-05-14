@@ -19,16 +19,23 @@ import javax.swing.JTextField;
 
 public class MenuSalon extends JFrame{
     private JPanel fondoHamburguesa;
+    
     private JTextArea ordenes;
-    private JTextArea ordenesCompletadas;
+    private JTextArea ordenesCompletadas; 
+    private JTextArea ingredientes;
+    private JTextArea informacion;
+    
     private JScrollPane scrollOrdenes;
     private JScrollPane scrollOrdeComple;
+    private JScrollPane scrollIngredientes;
+    private JScrollPane scrollInformacion;
     
     private JLabel hamburguesasDisponible;
     private JLabel ingrediente;
     private JLabel numeroMesa;
     private JLabel ordenesPendientes;
     private JLabel ordenesProcesadas;
+    private JLabel informacionMostrar;
     
     private JTextField numeroMesaEntrada;
     private JTextField ingredienteEntrada;
@@ -40,6 +47,7 @@ public class MenuSalon extends JFrame{
     private JButton cancelar;
     private JButton facturar;
     private JButton verMesa;
+    private JButton listaIngredientes;
     
     private JComboBox hamburguesasPredeterminadas;
 
@@ -47,24 +55,32 @@ public class MenuSalon extends JFrame{
         super("Menu salon");
         
         this.fondoHamburguesa = new JPanel();
+        
         this.ordenes = new JTextArea();
         this.ordenesCompletadas = new JTextArea();
+        this.ingredientes = new JTextArea();
+        this.informacion = new JTextArea();
+        
         this.scrollOrdenes = new JScrollPane(this.ordenes, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.scrollOrdeComple = new JScrollPane(this.ordenesCompletadas, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollIngredientes = new JScrollPane(this.ingredientes, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollInformacion = new JScrollPane(this.informacion, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
-        this.agregarIngrediente = new JButton("Agregar ingrediente");
-        this.verIngredientes = new JButton("Ingredientes");
+        this.agregarIngrediente = new JButton("Agregar ingrediente/s");
+        this.verIngredientes = new JButton("Ver ingredientes");
         this.agregarProducto = new JButton("Añadir producto");
         this.enviarOrden = new JButton("Enviar orden");
         this.cancelar = new JButton("Cancelar");
         this.facturar = new JButton("Facturar");
         this.verMesa = new JButton("Ver mesa");
+        this.listaIngredientes = new JButton("Lista ingredientes");
         
         this.hamburguesasDisponible = new JLabel("Hamburguesas disponibles:");
         this.ingrediente = new JLabel("Ingrediente:");
         this.ordenesPendientes = new JLabel("Ordenes pendientes:");
         this.ordenesProcesadas = new JLabel("Ordenes procesadas:");
         this.numeroMesa = new JLabel("Numero de mesa:");
+        this.informacionMostrar = new JLabel("Informacion:");
         
         this.ingredienteEntrada = new JTextField();
         this.numeroMesaEntrada = new JTextField();
@@ -81,18 +97,31 @@ public class MenuSalon extends JFrame{
         this.fondoHamburguesa.setLayout(null);
         
         this.ordenes.setLineWrap(true);
+        this.ordenes.setEditable(false);
         this.ordenesCompletadas.setLineWrap(true); 
-        this.scrollOrdenes.setBounds(540, 200, 180, 400);
-        this.scrollOrdeComple.setBounds(740, 200, 180, 400);
+        this.ordenesCompletadas.setEditable(false);
+        this.ingredientes.setLineWrap(true); 
+        this.ingredientes.setEditable(false);
+        this.informacion.setLineWrap(true); 
+        this.informacion.setEditable(false);
         
-        this.enviarOrden.setBounds(20, 160, 140, 20);
+        this.scrollOrdenes.setBounds(540, 200, 180, 300);
+        this.scrollOrdeComple.setBounds(740, 200, 180, 300);
+        this.scrollIngredientes.setBounds(20, 130, 340, 100);
+        this.scrollInformacion.setBounds(540, 40, 380, 100);
+        
+        this.enviarOrden.setBounds(20, 110, 140, 20);
         this.enviarOrden.setFocusable(false);
-        this.facturar.setBounds(190, 160, 100, 20);
+        this.facturar.setBounds(190, 110, 100, 20);
         this.facturar.setFocusable(false); 
         this.agregarIngrediente.setBounds(20, 90, 160, 20);
         this.agregarIngrediente.setFocusable(false); 
         this.verIngredientes.setBounds(200, 90, 160, 20);
-        this.verIngredientes.setFocusable(false);
+        this.verIngredientes.setFocusable(false);        
+        this.verMesa.setBounds(340, 70, 160, 20);
+        this.verMesa.setFocusable(false);
+        this.listaIngredientes.setBounds(340, 110, 160, 20);
+        this.listaIngredientes.setFocusable(false);
          
         this.agregarProducto.setBounds(20, 260, 160, 20);
         this.agregarProducto.setFocusable(false);
@@ -109,6 +138,8 @@ public class MenuSalon extends JFrame{
         this.ordenesProcesadas.setFont(new Font("", Font.BOLD, 12));
         this.numeroMesa.setBounds(20, 40, 160, 20); 
         this.numeroMesa.setFont(new Font("", Font.BOLD, 14));
+        this.informacionMostrar.setBounds(340, 40, 160, 20); 
+        this.informacionMostrar.setFont(new Font("", Font.BOLD, 14));
         
         this.hamburguesasPredeterminadas.addItem(" ");
         this.hamburguesasPredeterminadas.addItem("Pollo");
@@ -128,6 +159,11 @@ public class MenuSalon extends JFrame{
         this.fondoHamburguesa.add(this.verIngredientes);
         this.fondoHamburguesa.add(this.agregarProducto);
         this.fondoHamburguesa.add(this.cancelar);
+        this.fondoHamburguesa.add(this.scrollIngredientes);
+        this.add(this.verMesa);
+        this.add(this.listaIngredientes);
+        this.add(this.informacionMostrar);
+        this.add(this.scrollInformacion); 
         this.add(this.numeroMesaEntrada);
         this.add(this.enviarOrden);
         this.add(this.facturar); 
@@ -142,7 +178,7 @@ public class MenuSalon extends JFrame{
     public void ventana () {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBackground(Color.LIGHT_GRAY);
-        this.setSize(1080, 720); 
+        this.setSize(960, 580); 
         this.setResizable(false);
         this.setLayout(null);
         this.setVisible(true);
