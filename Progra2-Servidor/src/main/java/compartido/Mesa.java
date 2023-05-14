@@ -1,13 +1,14 @@
 package compartido;
 
 import Secundario.Hamburguesa;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
  * @author rodri
  */
 
-public class Mesa {
+public class Mesa implements Serializable {
     
     private int numero;
     private boolean ocupada;

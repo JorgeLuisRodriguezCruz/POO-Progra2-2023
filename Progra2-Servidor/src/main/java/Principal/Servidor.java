@@ -13,29 +13,26 @@ public class Servidor {
     private Socket salon;
     private Socket cocina;
     private Socket simulacion;
-    private ComunicacionSalon comunicionSalon;
-    private ComunicacionCocina comunicionCocina;
-    private ComunicacionSimulacion comunicionSimulacion;
+    private ConexionSalon conexionSalon;
+    private ConexionCocina conexionCocina;
+    private ConexionSimulacion conexionSimulacion;
 
-    public Servidor () {
-        this.comunicionSalon = new ComunicacionSalon(this);
-        this.comunicionCocina = new ComunicacionCocina(this);
-        this.comunicionSimulacion = new ComunicacionSimulacion(this);
+    public Servidor () { 
+        this.conectarse();
         
-        this.iniciar();
+        this.conexionSalon = new ConexionSalon(this);
+        //this.conexionCocina = new ComunicacionCocina(this);
+        //this.conexionSimulacion = new ComunicacionSimulacion(this);
+        
+        this.conexionSalon.start();
     }
     
-    public void iniciar () {
+    public void conectarse () {
         try {
             this.server = new ServerSocket(5555);
             this.salon = server.accept();
             //this.cocina = server.accept();
-            //this.simulacion = server.accept();
-            this.comunicionSalon = new ComunicacionSalon(this);
-            //this.comunicionCocina = new ComunicacionCocina(this);
-            //this.comunicionSimulacion = new ComunicacionSimulacion(this);
-            
-            this.comunicionSalon.start();
+            //this.simulacion = server.accept(); 
             
         } catch (Exception e) {
         }

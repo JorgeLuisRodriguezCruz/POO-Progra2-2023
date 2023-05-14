@@ -13,13 +13,13 @@ import java.util.logging.Logger;
  * @author rodri
  */
 
-public class ComunicacionSalon extends Thread {
+public class ConexionSalon extends Thread {
     private boolean corre;
     private Servidor servidor;
     private ObjectInputStream entrada;
     private ObjectOutputStream salida;
     
-    public ComunicacionSalon (Servidor servidor){
+    public ConexionSalon (Servidor servidor){
         this.corre = true;
         this.servidor = servidor;
         try {
@@ -37,9 +37,13 @@ public class ComunicacionSalon extends Thread {
             try {
                 mensaje = (Mensaje)this.entrada.readObject();
                 switch(mensaje.getTipo()) {
-                    case NOTIFICACION:
-                        break;
                     case ORDEN:
+                        break;
+                    case SALIDA:
+                        this.entrada.close();
+                        this.salida.close();
+                        this.servidor.getSalon().close();
+                        this.corre = false;
                         break;
                 }
             } catch (IOException ex) { 

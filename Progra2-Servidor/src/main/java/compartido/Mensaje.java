@@ -1,12 +1,13 @@
 package compartido;
 
 import Secundario.TipoMensaje;
+import java.io.Serializable;
 
 /*
  * @author rodri
  */
 
-public class Mensaje {
+public class Mensaje implements Serializable {
     
     private TipoMensaje tipo;
     private Mesa contenido;
