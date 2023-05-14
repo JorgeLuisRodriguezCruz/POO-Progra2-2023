@@ -52,7 +52,7 @@ public class MenuSalon extends JFrame{
     private JComboBox hamburguesasPredeterminadas;
 
     public MenuSalon() {
-        super("Menu salon");
+        super("Salon");
         
         this.fondoHamburguesa = new JPanel();
         
@@ -184,6 +184,68 @@ public class MenuSalon extends JFrame{
         this.setVisible(true);
         
     }
+
+    public JButton getAgregarIngrediente() {
+        return agregarIngrediente;
+    }
+
+    public JButton getVerIngredientes() {
+        return verIngredientes;
+    }
+
+    public JButton getAgregarProducto() {
+        return agregarProducto;
+    }
+
+    public JButton getEnviarOrden() {
+        return enviarOrden;
+    }
+
+    public JButton getCancelar() {
+        return cancelar;
+    }
+
+    public JButton getFacturar() {
+        return facturar;
+    }
+
+    public JButton getVerMesa() {
+        return verMesa;
+    }
+
+    public JButton getListaIngredientes() {
+        return listaIngredientes;
+    }
+
+    public JTextArea getOrdenes() {
+        return ordenes;
+    }
+
+    public JTextArea getOrdenesCompletadas() {
+        return ordenesCompletadas;
+    }
+
+    public JTextArea getIngredientes() {
+        return ingredientes;
+    }
+
+    public JTextArea getInformacion() {
+        return informacion;
+    }
+
+    public JTextField getNumeroMesaEntrada() {
+        return numeroMesaEntrada;
+    }
+
+    public JTextField getIngredienteEntrada() {
+        return ingredienteEntrada;
+    }
+
+    public JComboBox getHamburguesasPredeterminadas() {
+        return hamburguesasPredeterminadas;
+    }
+    
+    
     
     
 }
