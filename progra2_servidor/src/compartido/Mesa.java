@@ -1,6 +1,5 @@
 package compartido;
 
-import Secundario.Hamburguesa;
 import java.io.Serializable;
 import java.util.ArrayList;
 

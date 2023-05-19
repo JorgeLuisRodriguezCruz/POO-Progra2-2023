@@ -1,5 +1,6 @@
-package Secundario;
+package compartido;
 
+import compartido.Ingrediente;
 import java.util.ArrayList;
 
 /*

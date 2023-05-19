@@ -1,8 +1,5 @@
 package compartido;
 
-import Secundario.Hamburguesa;
-import Secundario.Ingrediente;
-
 /*
  * @author rodri
  */

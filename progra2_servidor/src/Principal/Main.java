@@ -1,6 +1,6 @@
 package Principal;
 
-import Secundario.TipoMensaje;
+import compartido.TipoMensaje;
 import com.sun.java.accessibility.util.TopLevelWindowListener;
 
 /*
@@ -12,7 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        
+        Servidor ser = new Servidor();
+        /*
         TipoMensaje tipo = TipoMensaje.ORDEN;
         System.out.println("El tipo: "+tipo.toString());
         
@@ -28,5 +29,6 @@ public class Main {
             case SALIDA:
                 break;
         }
+        */
     }
 }

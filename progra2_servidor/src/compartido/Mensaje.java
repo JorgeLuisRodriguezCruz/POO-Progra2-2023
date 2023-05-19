@@ -1,6 +1,5 @@
 package compartido;
 
-import Secundario.TipoMensaje;
 import java.io.Serializable;
 
 /*

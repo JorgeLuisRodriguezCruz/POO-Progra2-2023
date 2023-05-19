@@ -1,4 +1,4 @@
-package Secundario;
+package compartido;
 
 /*
  * @author rodri

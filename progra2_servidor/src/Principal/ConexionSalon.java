@@ -15,43 +15,44 @@ import java.util.logging.Logger;
 
 public class ConexionSalon extends Thread {
     private boolean corre;
-    private Servidor servidor;
-    private ObjectInputStream entrada;
-    private ObjectOutputStream salida;
+    private Servidor servidor; 
     
     public ConexionSalon (Servidor servidor){
         this.corre = true;
-        this.servidor = servidor;
-        try {
-            this.entrada = new ObjectInputStream(this.servidor.getSalon().getInputStream());
-            this.salida = new ObjectOutputStream(this.servidor.getSalon().getOutputStream());
-        } catch (Exception e) {}
+        this.servidor = servidor; 
     }
-    
     
     @Override
     public void run () {
         
+        //System.out.println("Entramos a run");
         while (this.corre) {
-            Mensaje mensaje;
             try {
-                mensaje = (Mensaje)this.entrada.readObject();
+                sleep(1000);
+                
+                System.out.println("ooooo");  
+                System.out.println("Esperando mensaje");
+                
+                Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
+                
                 switch(mensaje.getTipo()) {
                     case ORDEN:
+                        System.out.println("Mensaje de orden"); 
                         break;
                     case SALIDA:
-                        this.entrada.close();
-                        this.salida.close();
-                        this.servidor.getSalon().close();
+                        System.out.println("Nos llega una salida"); 
                         this.corre = false;
                         break;
+                    default:
+                        System.out.println("Mensaje desconocido"); 
+                        break;         
                 }
+                
             } catch (IOException ex) { 
                 System.out.println(""+ex.toString());
             } catch (ClassNotFoundException ex) { 
                 System.out.println(""+ex.toString());
-            }  
-            this.corre = false;
+            } catch (InterruptedException ex) { }
         }
     }
     
