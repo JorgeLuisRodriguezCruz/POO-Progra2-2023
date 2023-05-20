@@ -28,15 +28,15 @@ public class ConexionServer extends Thread {
     
     @Override
     public void run () {
-        System.out.println("Conexion con el server");
+        //System.out.println("Conexion con el server");
         int num = 0;
         while (this.corre){
             try {
                 sleep(1000);
-                System.out.println("aaaa");
+                //System.out.println("aaaaSalon");
                 
                 Mensaje msj;
-                if (num == 4) {
+                if (num == 40) {
                     msj = new Mensaje(SALIDA, null); 
                     this.corre = false;
                 } else
@@ -47,29 +47,6 @@ public class ConexionServer extends Thread {
             } catch (InterruptedException ex) { 
             } catch (IOException ex) { 
             }
-            
-            /*
-            Mensaje mensaje;
-            try {
-                
-                System.out.println("Enviando mensaje");  
-                mensaje = (Mensaje) this.entrada.readObject();
-                System.out.println("Mensaje enviado");
-                mensaje = (Mensaje)this.entrada.readObject();
-                switch(mensaje.getTipo()) {
-                    case ORDEN:
-                        break;
-                    case SALIDA:
-                        break;
-                }
-                //this.salida.close();
-                //this.entrada.close();
-                //this.controlador.getCliente().close();
-                
-            } catch (IOException ex) { System.out.println(""+ex.toString());
-            } catch (ClassNotFoundException ex) { }
-            */
-            //this.corre = false;
         }
     }
     

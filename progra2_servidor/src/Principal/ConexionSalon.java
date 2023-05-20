@@ -30,8 +30,8 @@ public class ConexionSalon extends Thread {
             try {
                 sleep(1000);
                 
-                System.out.println("ooooo");  
-                System.out.println("Esperando mensaje");
+                //System.out.println("ooooo");  
+                //System.out.println("Esperando mensaje");
                 
                 Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
                 

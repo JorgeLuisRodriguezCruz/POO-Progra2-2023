@@ -21,13 +21,16 @@ public class Servidor {
     private ConexionCocina conexionCocina;
     private ConexionSimulacion conexionSimulacion;
     
-    private ObjectInputStream entradaSalon;
+    private ObjectInputStream entradaSalon; 
+    private ObjectInputStream entradaCocina;
+    
     private ObjectOutputStream salidaSalon;
+    private ObjectOutputStream salidaCocina;
 
     public Servidor () { 
         this.conexionSalon = new ConexionSalon(this); 
+        this.conexionCocina = new ConexionCocina(this);
         
-        //this.conexionCocina = new ComunicacionCocina(this);
         //this.conexionSimulacion = new ComunicacionSimulacion(this);
         
         //this.conexionSalon.conectarse();
@@ -47,7 +50,14 @@ public class Servidor {
             System.out.println("Le damos a start");
             this.conexionSalon.start();
             
-            //this.cocina = server.accept();
+            this.cocina = server.accept();
+            System.out.println("Aceptaaaaamos a la cocina");
+             
+            this.salidaCocina = new ObjectOutputStream(this.cocina.getOutputStream());
+            this.entradaCocina = new ObjectInputStream(this.cocina.getInputStream());
+            
+            System.out.println("Se sale y se entra a la cocina");
+            this.conexionCocina.start();
             //this.simulacion = server.accept(); 
             
         } catch (Exception e) {

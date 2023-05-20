@@ -2,6 +2,8 @@ package Principal;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  *
@@ -11,22 +13,23 @@ import java.io.ObjectOutputStream;
 public class ConexionCocina extends Thread {
     private boolean corre;
     private Servidor servidor;
-    private ObjectInputStream entrada;
-    private ObjectOutputStream salida;
     
     public ConexionCocina (Servidor servidor){
-        this.servidor = servidor;
         this.corre = true;
-        try {
-        this.entrada = new ObjectInputStream(this.servidor.getCocina().getInputStream());
-        } catch (Exception e) {}
+        this.servidor = servidor;
     }
     
     @Override
     public void run () {
         
         while (this.corre) {
-            this.corre = false;
+            try {
+                sleep(1000);
+                System.out.println("Cocina conex");
+                        
+                //this.corre = false;
+            } catch (InterruptedException ex) { 
+            }
         }
     }
     
