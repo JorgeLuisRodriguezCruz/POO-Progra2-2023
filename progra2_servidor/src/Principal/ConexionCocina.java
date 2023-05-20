@@ -1,5 +1,9 @@
 package Principal;
 
+import compartido.Mensaje;
+import static compartido.TipoMensaje.ORDEN;
+import static compartido.TipoMensaje.SALIDA;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
@@ -25,10 +29,25 @@ public class ConexionCocina extends Thread {
         while (this.corre) {
             try {
                 sleep(1000);
-                System.out.println("Cocina conex");
-                        
-                //this.corre = false;
+                
+                Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
+                
+                switch(mensaje.getTipo()) {
+                    case ORDEN:
+                        System.out.println("Mensaje de orden"); 
+                        break;
+                    case SALIDA:
+                        System.out.println("Nos llega una salida"); 
+                        this.corre = false;
+                        break;
+                    default:
+                        System.out.println("Mensaje desconocido"); 
+                        break;         
+                }
+                
             } catch (InterruptedException ex) { 
+            } catch (ClassNotFoundException ex) {
+            } catch (IOException ex) {  
             }
         }
     }

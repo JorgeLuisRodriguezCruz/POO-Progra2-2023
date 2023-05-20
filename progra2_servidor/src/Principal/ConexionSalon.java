@@ -25,13 +25,9 @@ public class ConexionSalon extends Thread {
     @Override
     public void run () {
         
-        //System.out.println("Entramos a run");
         while (this.corre) {
             try {
-                sleep(1000);
-                
-                //System.out.println("ooooo");  
-                //System.out.println("Esperando mensaje");
+                sleep(1000); 
                 
                 Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
                 

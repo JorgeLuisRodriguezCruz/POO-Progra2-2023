@@ -1,14 +1,10 @@
 package modelo;
 
-import Principal.Servidor;
 import compartido.Mensaje;
-import compartido.TipoMensaje;
 import static compartido.TipoMensaje.ORDEN;
 import static compartido.TipoMensaje.SALIDA;
 import controlador.Controlador;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,13 +24,27 @@ public class ConexionServer extends Thread {
     
     @Override
     public void run () {
-        //System.out.println("Conexion con el server");
-        int num = 0;
+        
         while (this.corre){
             try {
                 sleep(1000);
-                //System.out.println("aaaaSalon");
+                //System.out.println("Salon");
                 
+                Mensaje mensaje = (Mensaje) this.controlador.getEntrada().readObject();
+                
+                switch(mensaje.getTipo()) {
+                    case ORDEN:
+                        System.out.println("Mensaje de orden"); 
+                        break;
+                    case SALIDA:
+                        System.out.println("Nos llega una salida"); 
+                        this.corre = false;
+                        break;
+                    default:
+                        System.out.println("Mensaje desconocido"); 
+                        break;         
+                }
+                /*
                 Mensaje msj;
                 if (num == 40) {
                     msj = new Mensaje(SALIDA, null); 
@@ -42,10 +52,12 @@ public class ConexionServer extends Thread {
                 } else
                     msj = new Mensaje(ORDEN, null);
                 num++;
-                this.controlador.getSalida().writeObject(msj);
+                this.controlador.getSalida().writeObject(msj);*/
+                
                 
             } catch (InterruptedException ex) { 
             } catch (IOException ex) { 
+            } catch (ClassNotFoundException ex) {
             }
         }
     }

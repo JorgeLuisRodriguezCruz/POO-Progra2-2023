@@ -1,8 +1,8 @@
 package modelo;
 
+import compartido.Mensaje;
 import controlador.Controlador;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException; 
 
 /* 
  * @author rodri
@@ -19,15 +19,30 @@ public class ConexionServer extends Thread {
     }
     
     @Override
-    public void run () {
-        
-        System.out.println("Conexion con el server"); 
+    public void run () { 
         
         while (this.corre){
             try {
                 sleep(1000);
-                System.out.println("pOOOq"); 
+                //System.out.println("pOOOq");
+                
+                Mensaje mensaje = (Mensaje) this.controlador.getEntrada().readObject();
+                
+                switch(mensaje.getTipo()) {
+                    case ORDEN:
+                        System.out.println("Mensaje de orden"); 
+                        break;
+                    case SALIDA:
+                        System.out.println("Nos llega una salida"); 
+                        this.corre = false;
+                        break;
+                    default:
+                        System.out.println("Mensaje desconocido"); 
+                        break;         
+                } 
             } catch (InterruptedException ex) { 
+            } catch (IOException ex) { 
+            } catch (ClassNotFoundException ex) { 
             }
         }
     }

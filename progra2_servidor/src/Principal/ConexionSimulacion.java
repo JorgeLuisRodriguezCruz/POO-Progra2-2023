@@ -3,6 +3,8 @@ package Principal;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  *
@@ -19,23 +21,19 @@ public class ConexionSimulacion extends Thread {
         this.servidor = servidor;
         this.corre = true;
     }
-        
-    private void conectarse () {
-        try {
-            Socket simulacion = this.servidor.getServer().accept();
-            this.servidor.setSimulacion(simulacion);
-            this.entrada = new ObjectInputStream(this.servidor.getSalon().getInputStream());
-        } catch (Exception e) {}
-    }
     
     @Override
-    public void run () {
-        this.conectarse();
+    public void run () { 
         
-        while (this.corre) {
-            
-            this.corre = false;
+        while (this.corre) { 
+            try { 
+                sleep(1000);
+                System.out.println("ConxSimu"); 
+                this.corre = false; 
+            } catch (InterruptedException ex) {
+                System.out.println(""+ex.getMessage());
+            }
+                
         }
     }
-    
 }

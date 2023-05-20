@@ -28,15 +28,21 @@ public class Controlador {
         try {
             this.cliente = new Socket("127.0.0.1", 5555);
             
-            System.out.println("Nos conectamos panas");
-            
             this.salida =  new ObjectOutputStream(this.cliente.getOutputStream()); 
             this.entrada = new ObjectInputStream(this.cliente.getInputStream());
-            
-            System.out.println("Tenemos salida y entrada");
             
             this.conexion.start();
         } catch (Exception e){ }
     }
+
+    public ObjectInputStream getEntrada() {
+        return entrada;
+    }
+
+    public ObjectOutputStream getSalida() {
+        return salida;
+    }
+    
+    
     
 }
