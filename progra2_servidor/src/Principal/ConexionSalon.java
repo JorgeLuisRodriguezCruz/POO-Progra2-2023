@@ -34,6 +34,7 @@ public class ConexionSalon extends Thread {
                 switch(mensaje.getTipo()) {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
+                        System.out.println(""+mensaje.getContenido().datosMesa());
                         break;
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 

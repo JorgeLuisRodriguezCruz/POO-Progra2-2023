@@ -10,17 +10,21 @@ import java.util.ArrayList;
 public class Mesa implements Serializable {
     
     private int numero;
-    private boolean ocupada;
+    private boolean atendida;
     private ArrayList<Hamburguesa> productos;
 
     public Mesa (int numero) {
         this.numero = numero;
-        this.ocupada = true;
+        this.atendida = false;
         this.productos = new ArrayList<Hamburguesa> ();
     }
     
     public void agregarProducto (Hamburguesa hamburguesa){
         this.productos.add(hamburguesa);
+    }
+    
+    public void vaciar () {
+        this.productos.removeAll(productos);
     }
     
     public int totalPagar () {
@@ -32,22 +36,17 @@ public class Mesa implements Serializable {
     }
     
     public String obtenerFactura (){
-        String factura = "\t-- Mesa #" + this.numero + " --\n";
+        String factura = "\t-- FACTURA MESA #" + this.numero + " --\n";
         for (int i = 0; i < this.productos.size(); i++) {
-            factura = factura + "\nHamburguesa: \n" + this.productos.get(i).toString(); 
+            factura = factura + "\nHamburguesa: \n" + this.productos.get(i).preciosIngredientes(); 
         }
         factura = factura + "\nTotal a pagar: "+this.totalPagar();
         return factura;
     }
     
-    public void liberar () {
-        this.ocupada = false;
-    }
-
     public String datosMesa () {
-        String datos = "\t-- Mesa #" + this.numero + " --\n";
-        for (int i = 0; i < this.productos.size(); i++) {
-            System.out.println("aa");
+        String datos = "-- Mesa #" + this.numero + " --\n";
+        for (int i = 0; i < this.productos.size(); i++) { 
             datos = datos + "\nHamburguesa: \n" + this.productos.get(i).ingredientes(); 
         }
         if (this.productos.size() == 0) {
@@ -60,13 +59,16 @@ public class Mesa implements Serializable {
         return numero;
     }
 
-    public boolean isOcupada() {
-        return ocupada;
-    }
+    public boolean getAtendida() {
+        return atendida;
+    } 
     
     public ArrayList<Hamburguesa> getProductos() {
         return productos;
     }
 
+    public void setAtendida(boolean atendida) {
+        this.atendida = atendida;
+    } 
     
 }

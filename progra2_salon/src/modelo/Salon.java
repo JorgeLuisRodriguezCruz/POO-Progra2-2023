@@ -51,4 +51,21 @@ public class Salon {
         return null;
     }
     
+    public Mesa obtenerMesaPendiente (int num) { 
+        for (int i = 0; i < this.mesasOrdenEnviada.size(); i++) {
+            if (this.mesasOrdenEnviada.get(i).getNumero() == num)
+                return this.mesasOrdenEnviada.get(i);
+        } 
+        return null;
+    }
+    
+    public String obtenerPendientes () {
+        String datos = "";
+        for (int i = 0; i < this.mesasOrdenEnviada.size(); i++) {
+            if (this.mesasOrdenEnviada.get(i).getAtendida() == false)
+                datos = datos + this.mesasOrdenEnviada.get(i).datosMesa() + "\n";
+        }
+        return datos;
+    }
+    
 }

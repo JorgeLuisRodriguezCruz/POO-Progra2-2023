@@ -1,13 +1,14 @@
 package compartido;
 
 import compartido.Ingrediente;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
  * @author rodri
  */
 
-public class Hamburguesa {
+public class Hamburguesa implements Serializable {
     
     private ArrayList<Ingrediente> ingredientes;
 
@@ -41,20 +42,34 @@ public class Hamburguesa {
     }
     
     public String ingredientes () {
-        String datos = "\tIngredientes: ";
+        String datos = "Ingredientes: ";
         for (int i = 0; i < this.ingredientes.size(); i++) {
             datos = datos + this.ingredientes.get(i).getNombre().toUpperCase() + " - "; 
         } 
         return datos;
     }
     
-    public String toString (){
+    public String ingredientesFormatoDos () {
+        String datos = "Ingredientes: \n";
+        for (int i = 0; i < this.ingredientes.size(); i++) {
+            datos = datos +"\t"+ this.ingredientes.get(i).getNombre().toUpperCase() + "\n"; 
+        } 
+        return datos;
+    }
+    
+    public String preciosIngredientes (){
         String datos = "\tIngredientes: ";
         for (int i = 0; i < this.ingredientes.size(); i++) {
             datos = datos + this.ingredientes.get(i).getNombre() + " - "; 
         }
         datos = datos + "\n\tCosto: " + this.obtenerPrecio();
         return datos;
+    }
+    
+    public boolean vacia (){
+        if (this.ingredientes.size() == 0)
+            return true;
+        return false;
     }
     
     public ArrayList<Ingrediente> getIngredientes() {

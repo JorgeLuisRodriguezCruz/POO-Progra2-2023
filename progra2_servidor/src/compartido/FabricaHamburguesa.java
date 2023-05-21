@@ -1,5 +1,7 @@
 package compartido;
 
+import java.util.ArrayList;
+
 /*
  * @author rodri
  */
@@ -16,7 +18,13 @@ public class FabricaHamburguesa {
         this.hamburguesaAuxiliar.agregarIngrediente(ingrediente); 
     }
     
-    public Hamburguesa obtenerHamburguesa () {
+    public void agregarIngredientes (ArrayList<Ingrediente> ingredientes){
+        for (int i = 0; i < ingredientes.size(); i++) {
+            this.agregarIngrediente(ingredientes.get(i));
+        }
+    }
+    
+    public Hamburguesa obtenerHamburguesaPersonalizada () {
         Hamburguesa resultado = this.hamburguesaAuxiliar;
         this.hamburguesaAuxiliar = new Hamburguesa();
         return resultado;
@@ -74,4 +82,44 @@ public class FabricaHamburguesa {
         return ingredientes;
     }
     
+    public Ingrediente obtenerIngrediente (String ingrediente){
+        ingrediente = ingrediente.toUpperCase();
+        
+        if (ingrediente.equals(Ingrediente.POLLO.getNombre()))
+            return Ingrediente.POLLO; 
+        if (ingrediente.equals( Ingrediente.HUEVO.getNombre() ))
+            return Ingrediente.HUEVO;
+        if (ingrediente.equals( Ingrediente.TOCINO.getNombre() ))
+            return Ingrediente.TOCINO;
+        if (ingrediente.equals( Ingrediente.TOMATE.getNombre() ))
+            return Ingrediente.TOMATE;
+        if (ingrediente.equals( Ingrediente.CEBOLLA.getNombre() ))
+            return Ingrediente.CEBOLLA;
+        if (ingrediente.equals( Ingrediente.MOSTAZA.getNombre() ))
+            return Ingrediente.MOSTAZA;
+        if (ingrediente.equals( Ingrediente.LECHUGA.getNombre() ))
+            return Ingrediente.LECHUGA;
+        if (ingrediente.equals( Ingrediente.MAYONESA.getNombre() ))
+            return Ingrediente.MAYONESA;
+        if (ingrediente.equals( Ingrediente.PEPINILLOS.getNombre() ))
+            return Ingrediente.PEPINILLOS;
+        if (ingrediente.equals( Ingrediente.CHAMPIÑONES.getNombre() ))
+            return Ingrediente.CHAMPIÑONES;
+        if (ingrediente.equals( Ingrediente.CARNE_DE_RES.getNombre() ))
+            return Ingrediente.CARNE_DE_RES;
+        if (ingrediente.equals( Ingrediente.QUESO_BLANCO.getNombre() ))
+            return Ingrediente.QUESO_BLANCO;
+        if (ingrediente.equals( Ingrediente.CARNE_DE_CERDO.getNombre() ))
+            return Ingrediente.CARNE_DE_CERDO;
+        if (ingrediente.equals( Ingrediente.QUESO_AMARILLO.getNombre() ))
+            return Ingrediente.QUESO_AMARILLO;
+        if (ingrediente.equals( Ingrediente.SALSA_DE_TOMATE.getNombre() ))
+            return Ingrediente.SALSA_DE_TOMATE;
+            
+        return null;
+    }
+    
+    public Hamburguesa obtenerHamburguesaAux () {
+        return this.hamburguesaAuxiliar;
+    }
 }

@@ -1,10 +1,12 @@
 package compartido;
 
+import java.io.Serializable;
+
 /*
  * @author rodri
  */
 
-public enum Ingrediente {
+public enum Ingrediente implements Serializable{
     
     POLLO ("Pollo",14),
     HUEVO ("Huevo",14),
@@ -31,7 +33,7 @@ public enum Ingrediente {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.toUpperCase();
     }
 
     public int getPrecio() {
