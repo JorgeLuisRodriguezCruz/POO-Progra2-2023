@@ -40,10 +40,18 @@ public class Hamburguesa {
         }
     }
     
+    public String ingredientes () {
+        String datos = "\tIngredientes: ";
+        for (int i = 0; i < this.ingredientes.size(); i++) {
+            datos = datos + this.ingredientes.get(i).getNombre().toUpperCase() + " - "; 
+        } 
+        return datos;
+    }
+    
     public String toString (){
         String datos = "\tIngredientes: ";
         for (int i = 0; i < this.ingredientes.size(); i++) {
-            datos = datos + this.ingredientes.get(i).getNombre() + "_"; 
+            datos = datos + this.ingredientes.get(i).getNombre() + " - "; 
         }
         datos = datos + "\n\tCosto: " + this.obtenerPrecio();
         return datos;

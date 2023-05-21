@@ -181,7 +181,7 @@ public class MenuSalon extends JFrame{
         this.setSize(960, 580); 
         this.setResizable(false);
         this.setLayout(null);
-        this.setVisible(true);
+        this.setVisible(false);
         
     }
 
