@@ -77,8 +77,8 @@ public class MenuSalon extends JFrame{
         
         this.hamburguesasDisponible = new JLabel("Hamburguesas disponibles:");
         this.ingrediente = new JLabel("Ingrediente:");
-        this.ordenesPendientes = new JLabel("Ordenes pendientes:");
-        this.ordenesProcesadas = new JLabel("Ordenes procesadas:");
+        this.ordenesPendientes = new JLabel("Ordenes pendientes");
+        this.ordenesProcesadas = new JLabel("Hostorial ordenes procesadas");
         this.numeroMesa = new JLabel("Numero de mesa:");
         this.informacionMostrar = new JLabel("Informacion:");
         
@@ -135,7 +135,7 @@ public class MenuSalon extends JFrame{
         this.ingrediente.setFont(new Font("", Font.BOLD, 14));
         this.ordenesPendientes.setBounds(540, 160, 160, 20); 
         this.ordenesPendientes.setFont(new Font("", Font.BOLD, 12));
-        this.ordenesProcesadas.setBounds(740, 160, 160, 20); 
+        this.ordenesProcesadas.setBounds(740, 160, 200, 20); 
         this.ordenesProcesadas.setFont(new Font("", Font.BOLD, 12));
         this.numeroMesa.setBounds(20, 40, 160, 20); 
         this.numeroMesa.setFont(new Font("", Font.BOLD, 14));
