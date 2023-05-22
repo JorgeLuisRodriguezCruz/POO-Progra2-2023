@@ -8,8 +8,8 @@ import vista.MenuCocina;
 public class Main {
  
     public static void main(String[] args) { 
-        //Controlador cont = new Controlador();
-        MenuCocina ven = new MenuCocina();
+        Controlador cont = new Controlador();
+        //MenuCocina ven = new MenuCocina();
         
     }
     

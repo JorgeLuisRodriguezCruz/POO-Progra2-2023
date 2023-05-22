@@ -29,12 +29,17 @@ public class ConexionSalon extends Thread {
             try {
                 sleep(1000); 
                 
-                Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
+                Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject(); 
                 
                 switch(mensaje.getTipo()) {
                     case ORDEN:
-                        System.out.println("Mensaje de orden"); 
-                        System.out.println(""+mensaje.getContenido().datosMesa());
+                        System.out.println("Mensaje de orden"); System.out.println("\n"+mensaje.getContenido().datosMesa());
+                        
+                        //this.servidor.enviarMensajeServerCocina(mensaje);
+                         
+                        //this.servidor.getSalidaCocina().writeObject(mensaje);
+                        //this.servidor.getSalidaCocina().flush();
+                        
                         break;
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 
@@ -46,10 +51,10 @@ public class ConexionSalon extends Thread {
                 }
                 
             } catch (IOException ex) { 
-                System.out.println(""+ex.toString());
+                System.out.println("aa --- "+ex.toString()+"\n");
             } catch (ClassNotFoundException ex) { 
-                System.out.println(""+ex.toString());
-            } catch (InterruptedException ex) { }
+                System.out.println("sss"+ex.toString());
+            } catch (InterruptedException ex) {System.out.println("EYEYEY"); }
         }
     }
     

@@ -63,6 +63,12 @@ public class Mesa implements Serializable {
         return atendida;
     } 
     
+    public boolean mesaVacia (){
+        if (this.productos.size() == 0)
+            return true;
+        return false;
+    }
+    
     public ArrayList<Hamburguesa> getProductos() {
         return productos;
     }

@@ -1,9 +1,15 @@
 package Principal;
 
+import compartido.Mensaje;
+import compartido.Mesa;
+import compartido.TipoMensaje;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,6 +68,16 @@ public class Servidor {
             this.conexionSimulacion.start();
             
         } catch (Exception e) {
+        }
+    }
+
+    public void enviarMensajeServerCocina (Mensaje mensaje) {
+        Mensaje msj = new Mensaje(TipoMensaje.SALIDA, mensaje.getContenido());
+        try {
+            this.salidaCocina.writeObject(mensaje);
+            this.salidaCocina.flush();
+        } catch (IOException ex) {
+            System.out.println("msj -> Cocina\n"+ex.getMessage());
         }
     }
     

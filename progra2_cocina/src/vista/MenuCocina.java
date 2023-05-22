@@ -63,6 +63,7 @@ public class MenuCocina extends JFrame {
         this.completarAleartorio.setFocusable(false);
         
         this.ordenesSalida.setLineWrap(true);
+        this.ordenesSalida.setEditable(false);
         
         this.scrollOrdenesSalida.setBounds(distanciaBaseX, distanciaBaseY + 140, 440, 150);
         

@@ -204,6 +204,10 @@ public class Controlador implements ActionListener {
                 int numeroMesa = Integer.parseInt(this.menuSalon.getNumeroMesaEntrada().getText() );
                 Mesa mesa = this.salon.obtenerMesa(numeroMesa);
                 if (mesa != null) {
+                    if (mesa.mesaVacia()){
+                        JOptionPane.showMessageDialog(null, "Debe agregar almenos un producto para enviar una orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
                     this.salon.getMesas().remove(mesa);
                     this.salon.getMesasOrdenEnviada().add(mesa);
                     //Llamar intrucciones que envien mensaje al server y actualice los pedidos pendientes

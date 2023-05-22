@@ -1,15 +1,30 @@
 package controlador;
 
+import compartido.Mensaje;
+import compartido.Mesa;
+import compartido.TipoMensaje;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Cocina;
 import modelo.ConexionServer;
+import vista.MenuCocina;
 
 /*
  * @author rodri
  */
 
-public class Controlador {
+public class Controlador implements ActionListener {
+    
+    private MenuCocina menuCocina;
+    
+    private Cocina cocina;
     
     private Socket cliente;
     
@@ -19,7 +34,11 @@ public class Controlador {
     private ObjectOutputStream salida;
 
     public Controlador() {
+        this.menuCocina = new MenuCocina();
+        this.cocina = new Cocina();
         this.conexion = new ConexionServer(this);
+        
+        this.escuchar();
         
         this.conectarse();
     }
@@ -35,6 +54,79 @@ public class Controlador {
         } catch (Exception e){ }
     }
 
+    public void enviarMensaje (Mesa mesa) {
+        Mensaje mensaje = new Mensaje(TipoMensaje.NOTIFICACION, mesa);
+        
+        try {
+            this.salida.writeObject(mensaje);
+            this.salida.flush();
+            
+            this.salida.close();
+            
+            this.salida = new ObjectOutputStream (this.cliente.getOutputStream());
+            
+        } catch (IOException ex) {
+            System.out.println(""+ex.getMessage());
+        } 
+    }
+    
+    public void actualizarOrdenes () {
+        this.menuCocina.getOrdenesSalida().setText( this.cocina.obtenerOrdenes() );
+    }
+    
+    public void agregarOrden (Mesa mesa) {
+        this.cocina.agregarOrden(mesa);
+        this.actualizarOrdenes();
+    }
+    
+    private void escuchar () {
+        this.menuCocina.getCompletar().addActionListener(this);
+        this.menuCocina.getCompletarAleartorio().addActionListener(this);
+    }
+    
+    private boolean comprobarNumMesaEntrada () {
+        String numMesa = this.menuCocina.getNumeroMesaEntrada().getText();
+        try {
+            int num = Integer.parseInt(numMesa);
+            if (num <= 0)
+                num = 1/0;
+        } catch (Exception e) {
+            return false;
+        } 
+        return true;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.menuCocina.getCompletar()){
+            if(this.comprobarNumMesaEntrada()){
+                int numMesa = Integer.parseInt( this.menuCocina.getNumeroMesaEntrada().getText() );
+                Mesa mesa = this.cocina.obtenerMesa(numMesa);
+                if (mesa != null){
+                    this.cocina.removerOrden(mesa);
+                    //Hay que enviar msj
+                    this.actualizarOrdenes();
+                } else
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado la orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            } else 
+                JOptionPane.showMessageDialog(null, "Debe introducir el numero de la mesa de una orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        if (e.getSource() == this.menuCocina.getCompletarAleartorio()){
+            Mesa mesa = this.cocina.obtenerMesaAleatoria();
+            if (mesa != null){
+                this.cocina.removerOrden(mesa);
+                this.actualizarOrdenes();
+                //Hay que enviar msj
+                
+            } else
+                JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            
+            return;
+        }
+        
+    }
+    
     public ObjectInputStream getEntrada() {
         return entrada;
     }
@@ -42,7 +134,7 @@ public class Controlador {
     public ObjectOutputStream getSalida() {
         return salida;
     }
-    
-    
+
+   
     
 }
