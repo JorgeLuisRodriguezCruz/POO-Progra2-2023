@@ -71,7 +71,7 @@ public class Controlador implements ActionListener {
         this.menuSalon.getEnviarOrden().addActionListener(this);
         this.menuSalon.getFacturar().addActionListener(this);
         this.menuSalon.getListaIngredientes().addActionListener(this);
-        this.menuSalon.getVerIngredientes().addActionListener(this);
+            //this.menuSalon.getVerIngredientes().addActionListener(this);
         this.menuSalon.getVerMesa().addActionListener(this);
     }
     
@@ -173,15 +173,16 @@ public class Controlador implements ActionListener {
             } 
             this.menuSalon.getHamburguesasPredeterminadas().setSelectedIndex(0);
             this.menuSalon.getIngredienteEntrada().setText("");
-            return;
-        }
-        if (e.getSource() == this.menuSalon.getVerIngredientes()) {
             this.menuSalon.getIngredientes().setText( this.salon.getFrabrica().obtenerHamburguesaAux().ingredientesFormatoDos());
             return;
         }
+        /*if (e.getSource() == this.menuSalon.getVerIngredientes()) {
+            this.menuSalon.getIngredientes().setText( this.salon.getFrabrica().obtenerHamburguesaAux().ingredientesFormatoDos());
+            return;
+        }*/
         if (e.getSource() == this.menuSalon.getCancelar()) {
             this.salon.getFrabrica().obtenerHamburguesaPersonalizada();
-            this.menuSalon.getIngredientes().setText("");
+            this.menuSalon.getIngredientes().setText("Ingredientes:");
             return;
         }
         if (e.getSource() == this.menuSalon.getAgregarProducto()) {
@@ -196,7 +197,7 @@ public class Controlador implements ActionListener {
                         JOptionPane.showMessageDialog(null, "La mesa no esta disponible", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 }
             } 
-            this.menuSalon.getIngredientes().setText("");
+            this.menuSalon.getIngredientes().setText( this.salon.getFrabrica().obtenerHamburguesaAux().ingredientesFormatoDos());
             return;
         }
         if (e.getSource() == this.menuSalon.getEnviarOrden()) {
@@ -224,6 +225,7 @@ public class Controlador implements ActionListener {
                 Mesa mesa = this.salon.obtenerMesaPendiente(numeroMesa);
                 if (mesa != null) {
                     if (mesa.getAtendida()){
+                        this.menuSalon.getInformacion().setText( mesa.obtenerFactura()  );
                         this.salon.getMesasOrdenEnviada().remove(mesa);
                         mesa.vaciar();
                         mesa.setAtendida(false);

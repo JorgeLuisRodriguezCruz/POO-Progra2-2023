@@ -1,6 +1,7 @@
 package Principal;
 
 import compartido.Mensaje;
+import static compartido.TipoMensaje.SALIDA;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -33,9 +34,9 @@ public class ConexionSalon extends Thread {
                 
                 switch(mensaje.getTipo()) {
                     case ORDEN:
-                        System.out.println("Mensaje de orden"); System.out.println("\n"+mensaje.getContenido().datosMesa());
+                        System.out.println("Mensaje de orden"); //System.out.println("\n"+mensaje.getContenido().datosMesa());
                         
-                        //this.servidor.enviarMensajeServerCocina(mensaje);
+                        this.servidor.enviarMensajeServerCocina(mensaje);
                          
                         //this.servidor.getSalidaCocina().writeObject(mensaje);
                         //this.servidor.getSalidaCocina().flush();
@@ -44,6 +45,7 @@ public class ConexionSalon extends Thread {
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 
                         this.corre = false;
+                        
                         break;
                     default:
                         System.out.println("Mensaje desconocido"); 

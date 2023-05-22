@@ -45,7 +45,7 @@ public class Controlador implements ActionListener {
     
     public void conectarse () {
         try {
-            this.cliente = new Socket("127.0.0.1", 5555);
+            this.cliente = new Socket("127.0.0.1", 5566);
             
             this.salida =  new ObjectOutputStream(this.cliente.getOutputStream()); 
             this.entrada = new ObjectInputStream(this.cliente.getInputStream());
@@ -55,16 +55,10 @@ public class Controlador implements ActionListener {
     }
 
     public void enviarMensaje (Mesa mesa) {
-        Mensaje mensaje = new Mensaje(TipoMensaje.NOTIFICACION, mesa);
-        
+        Mensaje mensaje = new Mensaje(TipoMensaje.NOTIFICACION, mesa); 
         try {
             this.salida.writeObject(mensaje);
-            this.salida.flush();
-            
-            this.salida.close();
-            
-            this.salida = new ObjectOutputStream (this.cliente.getOutputStream());
-            
+            this.salida.flush(); 
         } catch (IOException ex) {
             System.out.println(""+ex.getMessage());
         } 
@@ -104,8 +98,8 @@ public class Controlador implements ActionListener {
                 Mesa mesa = this.cocina.obtenerMesa(numMesa);
                 if (mesa != null){
                     this.cocina.removerOrden(mesa);
-                    //Hay que enviar msj
                     this.actualizarOrdenes();
+                    this.enviarMensaje(mesa);
                 } else
                     JOptionPane.showMessageDialog(null, "No se ha encontrado la orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             } else 
@@ -117,7 +111,7 @@ public class Controlador implements ActionListener {
             if (mesa != null){
                 this.cocina.removerOrden(mesa);
                 this.actualizarOrdenes();
-                //Hay que enviar msj
+                this.enviarMensaje(mesa);
                 
             } else
                 JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna orden", "Informacion", JOptionPane.INFORMATION_MESSAGE);

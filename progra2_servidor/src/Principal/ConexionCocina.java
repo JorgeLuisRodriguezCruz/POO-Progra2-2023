@@ -1,6 +1,7 @@
 package Principal;
 
 import compartido.Mensaje;
+import static compartido.TipoMensaje.NOTIFICACION;
 import static compartido.TipoMensaje.ORDEN;
 import static compartido.TipoMensaje.SALIDA;
 import java.io.IOException;
@@ -30,11 +31,15 @@ public class ConexionCocina extends Thread {
             try {
                 sleep(1000);
                 
-                Mensaje mensaje = (Mensaje) this.servidor.getEntradaSalon().readObject();
+                Mensaje mensaje = (Mensaje) this.servidor.getEntradaCocina().readObject();
                 
                 switch(mensaje.getTipo()) {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
+                        break;
+                    case NOTIFICACION:
+                        System.out.println("Nos llega una Notificacion"); 
+                        this.servidor.enviarMensajeServerSalon(mensaje); 
                         break;
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 

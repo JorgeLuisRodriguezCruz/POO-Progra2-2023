@@ -36,6 +36,12 @@ public class ConexionServer extends Thread {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
                         break;
+                        
+                    case NOTIFICACION:
+                        System.out.println("Mensaje de notificacion"); 
+                        this.controlador.completarOrdenMesaPendiente(mensaje.getContenido().getNumero());
+                        break;
+                        
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 
                         this.corre = false;

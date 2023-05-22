@@ -17,7 +17,9 @@ import java.util.logging.Logger;
  */
 
 public class Servidor {
-    private ServerSocket server;
+    
+    private ServerSocket serverSalon;
+    private ServerSocket serverCocina;
     
     private Socket salon;
     private Socket cocina;
@@ -45,34 +47,34 @@ public class Servidor {
     
     public void conectarse () {
         try {
-            this.server = new ServerSocket(5555);
-            this.salon = server.accept();
+            this.serverSalon = new ServerSocket(5555);
+            this.salon = serverSalon.accept();
             
             this.salidaSalon = new ObjectOutputStream(this.salon.getOutputStream());
             this.entradaSalon = new ObjectInputStream(this.salon.getInputStream()); 
             
             this.conexionSalon.start();
             
-            this.cocina = server.accept();
+            this.serverCocina = new ServerSocket(5566);
+            this.cocina = serverCocina.accept();
             
             this.salidaCocina = new ObjectOutputStream(this.cocina.getOutputStream());
             this.entradaCocina = new ObjectInputStream(this.cocina.getInputStream());
             
             this.conexionCocina.start();
-            
-            this.simulacion = server.accept(); 
+            /*
+            this.simulacion = serverSalon.accept(); 
             
             this.salidaSimulacion = new ObjectOutputStream(this.simulacion.getOutputStream());
             this.entradaSimulacion = new ObjectInputStream(this.simulacion.getInputStream());
             
             this.conexionSimulacion.start();
-            
+            */
         } catch (Exception e) {
         }
     }
 
     public void enviarMensajeServerCocina (Mensaje mensaje) {
-        Mensaje msj = new Mensaje(TipoMensaje.SALIDA, mensaje.getContenido());
         try {
             this.salidaCocina.writeObject(mensaje);
             this.salidaCocina.flush();
@@ -81,8 +83,21 @@ public class Servidor {
         }
     }
     
-    public ServerSocket getServer() {
-        return server;
+    public void enviarMensajeServerSalon (Mensaje mensaje) {
+        try {
+            this.salidaSalon.writeObject(mensaje);
+            this.salidaSalon.flush();
+        } catch (IOException ex) {
+            System.out.println("msj -> Salon\n"+ex.getMessage());
+        }
+    }
+    
+    public ServerSocket getServerSalon() {
+        return serverSalon;
+    }
+    
+    public ServerSocket getServerCocina () {
+        return this.serverCocina;
     }
     
     public Socket getSalon() {

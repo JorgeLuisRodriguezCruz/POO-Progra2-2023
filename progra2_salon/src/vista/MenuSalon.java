@@ -102,6 +102,7 @@ public class MenuSalon extends JFrame{
         this.ordenesCompletadas.setEditable(false);
         this.ingredientes.setLineWrap(true); 
         this.ingredientes.setEditable(false);
+        this.ingredientes.setText("Ingredientes:");
         this.informacion.setLineWrap(true); 
         this.informacion.setEditable(false);
         
@@ -156,7 +157,7 @@ public class MenuSalon extends JFrame{
         this.fondoHamburguesa.add(this.ingrediente);
         this.fondoHamburguesa.add(this.ingredienteEntrada);
         this.fondoHamburguesa.add(this.agregarIngrediente);
-        this.fondoHamburguesa.add(this.verIngredientes);
+        //this.fondoHamburguesa.add(this.verIngredientes);
         this.fondoHamburguesa.add(this.agregarProducto);
         this.fondoHamburguesa.add(this.cancelar);
         this.fondoHamburguesa.add(this.scrollIngredientes);

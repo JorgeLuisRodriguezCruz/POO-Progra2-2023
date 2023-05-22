@@ -31,11 +31,10 @@ public class ConexionServer extends Thread {
                 switch(mensaje.getTipo()) {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
-                        //this.controlador.agregarOrden(mensaje.getContenido());
+                        this.controlador.agregarOrden(mensaje.getContenido());
                         break;
                     case SALIDA:
                         System.out.println("Nos llega una salida"); 
-                        this.controlador.agregarOrden(mensaje.getContenido());
                         this.corre = false;
                         break;
                     default:
