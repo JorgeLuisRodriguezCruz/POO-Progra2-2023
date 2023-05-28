@@ -76,5 +76,10 @@ public class Mesa implements Serializable {
     public void setAtendida(boolean atendida) {
         this.atendida = atendida;
     } 
+
+    public void setProductos(ArrayList<Hamburguesa> productos) {
+        this.productos = productos;
+    }
+    
     
 }

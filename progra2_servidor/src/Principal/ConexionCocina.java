@@ -37,14 +37,17 @@ public class ConexionCocina extends Thread {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
                         break;
-                    case NOTIFICACION:
-                        System.out.println("Nos llega una Notificacion"); 
+                        
+                    case NOTIFICACION: 
                         this.servidor.enviarMensajeServerSalon(mensaje); 
                         break;
+                        
                     case SALIDA:
-                        System.out.println("Nos llega una salida"); 
+                        System.out.println("Desconectar cocina");
+                        this.servidor.descconectarCocina();
                         this.corre = false;
                         break;
+                        
                     default:
                         System.out.println("Mensaje desconocido"); 
                         break;         
@@ -55,6 +58,14 @@ public class ConexionCocina extends Thread {
             } catch (IOException ex) {  
             }
         }
+    }
+
+    public boolean getCorre() {
+        return corre;
+    }
+
+    public void setCorre(boolean corre) {
+        this.corre = corre;
     }
     
 }

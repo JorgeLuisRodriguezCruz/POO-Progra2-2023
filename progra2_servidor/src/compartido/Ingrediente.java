@@ -14,7 +14,7 @@ public enum Ingrediente implements Serializable{
     TOMATE ("Tomate",14),
     CEBOLLA ("Cebolla",14),
     MOSTAZA ("Mostaza",14),
-    LECHUGA (".Lechuga",14),
+    LECHUGA ("Lechuga",14),
     MAYONESA ("Mayonesa",14),
     PEPINILLOS ("Pepinillos",14),
     CHAMPIÑONES ("Champiñones",14),

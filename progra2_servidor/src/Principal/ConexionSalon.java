@@ -34,16 +34,12 @@ public class ConexionSalon extends Thread {
                 
                 switch(mensaje.getTipo()) {
                     case ORDEN:
-                        System.out.println("Mensaje de orden"); //System.out.println("\n"+mensaje.getContenido().datosMesa());
-                        
+                        //System.out.println("Mensaje de orden"); //System.out.println("\n"+mensaje.getContenido().datosMesa());
                         this.servidor.enviarMensajeServerCocina(mensaje);
-                         
-                        //this.servidor.getSalidaCocina().writeObject(mensaje);
-                        //this.servidor.getSalidaCocina().flush();
-                        
                         break;
+                        
                     case SALIDA:
-                        System.out.println("Nos llega una salida"); 
+                        this.servidor.desconectarSalon();
                         this.corre = false;
                         
                         break;
@@ -58,6 +54,14 @@ public class ConexionSalon extends Thread {
                 System.out.println("sss"+ex.toString());
             } catch (InterruptedException ex) {System.out.println("EYEYEY"); }
         }
+    }
+
+    public boolean getCorre() {
+        return corre;
+    }
+
+    public void setCorre(boolean corre) {
+        this.corre = corre;
     }
     
 }

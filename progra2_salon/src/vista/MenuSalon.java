@@ -1,9 +1,12 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.ScrollPane;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -17,7 +20,7 @@ import javax.swing.JTextField;
  * @author rodri
  */
 
-public class MenuSalon extends JFrame{
+public class MenuSalon extends JFrame implements WindowListener {
     private JPanel fondoHamburguesa;
     
     private JTextArea ordenes;
@@ -50,9 +53,13 @@ public class MenuSalon extends JFrame{
     private JButton listaIngredientes;
     
     private JComboBox hamburguesasPredeterminadas;
+    
+    private Controlador controlador;
 
-    public MenuSalon() {
+    public MenuSalon(Controlador controlador) {
         super("Salon");
+        
+        this.controlador = controlador;
         
         this.fondoHamburguesa = new JPanel();
         
@@ -89,6 +96,8 @@ public class MenuSalon extends JFrame{
         
         this.iniciarComponentes();
         this.ventana();
+        
+        addWindowListener(this);
     }
     
     public void iniciarComponentes () {
@@ -245,6 +254,29 @@ public class MenuSalon extends JFrame{
     public JComboBox getHamburguesasPredeterminadas() {
         return hamburguesasPredeterminadas;
     }
+
+    @Override
+    public void windowOpened(WindowEvent e) {  }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        this.controlador.desconectar();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {  }
+
+    @Override
+    public void windowIconified(WindowEvent e) {  }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {  }
+
+    @Override
+    public void windowActivated(WindowEvent e) {  }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {  }
     
     
     

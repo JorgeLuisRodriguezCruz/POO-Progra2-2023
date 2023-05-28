@@ -34,7 +34,7 @@ public class Controlador implements ActionListener {
     private ObjectOutputStream salida;
 
     public Controlador() {
-        this.menuCocina = new MenuCocina();
+        this.menuCocina = new MenuCocina(this);
         this.cocina = new Cocina();
         this.conexion = new ConexionServer(this);
         
@@ -54,6 +54,24 @@ public class Controlador implements ActionListener {
         } catch (Exception e){ }
     }
 
+    public void desconectar () {
+        Mensaje mensaje = new Mensaje(TipoMensaje.SALIDA, null);
+        
+        try {
+            this.conexion.setCorre(false);
+            this.salida.writeObject(mensaje);
+            this.salida.flush();
+            
+            this.salida.close();
+            this.entrada.close();
+            this.cliente.close();
+            
+        } catch (IOException ex) {
+            System.out.println(""+ex.getMessage());
+        }
+        
+    }
+    
     public void enviarMensaje (Mesa mesa) {
         Mensaje mensaje = new Mensaje(TipoMensaje.NOTIFICACION, mesa); 
         try {

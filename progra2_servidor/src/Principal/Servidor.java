@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Servidor {
     
     private ServerSocket serverSalon;
     private ServerSocket serverCocina;
+    private ServerSocket serverSimulacion;
     
     private Socket salon;
     private Socket cocina;
@@ -62,19 +64,40 @@ public class Servidor {
             this.entradaCocina = new ObjectInputStream(this.cocina.getInputStream());
             
             this.conexionCocina.start();
-            /*
-            this.simulacion = serverSalon.accept(); 
             
-            this.salidaSimulacion = new ObjectOutputStream(this.simulacion.getOutputStream());
+            System.out.println("Aceptando"); 
+            this.serverSimulacion = new ServerSocket(5577);
+            this.simulacion = serverSimulacion.accept(); 
+            
+            System.out.println("Aceptanda la simu"); 
+                //this.salidaSimulacion = new ObjectOutputStream(this.simulacion.getOutputStream());
             this.entradaSimulacion = new ObjectInputStream(this.simulacion.getInputStream());
             
+            System.out.println("Creada la entrada simu"); 
             this.conexionSimulacion.start();
-            */
+            
         } catch (Exception e) {
         }
     }
 
+    public void enviarMensajeServerSalon (Mensaje mensaje) {
+        if (this.conexionSalon.getCorre() == false){
+            JOptionPane.showMessageDialog(null, "El salon esta desconectado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        try {
+            this.salidaSalon.writeObject(mensaje);
+            this.salidaSalon.flush();
+        } catch (IOException ex) {
+            System.out.println("msj -> Salon\n"+ex.getMessage());
+        }
+    }
+    
     public void enviarMensajeServerCocina (Mensaje mensaje) {
+        if (this.conexionCocina.getCorre() == false){
+            JOptionPane.showMessageDialog(null, "La cocina esta desconectado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         try {
             this.salidaCocina.writeObject(mensaje);
             this.salidaCocina.flush();
@@ -83,13 +106,44 @@ public class Servidor {
         }
     }
     
-    public void enviarMensajeServerSalon (Mensaje mensaje) {
+    public void desconectarSalon () {
         try {
-            this.salidaSalon.writeObject(mensaje);
-            this.salidaSalon.flush();
-        } catch (IOException ex) {
-            System.out.println("msj -> Salon\n"+ex.getMessage());
+            this.salidaSalon.close();
+            this.entradaSalon.close();
+            this.serverSalon.close();
+            
+            this.conexionSalon.setCorre(false);
+            
+        } catch (IOException ex) { 
+            System.out.println(""+ex.getMessage());
         }
+    }
+    
+    public void descconectarCocina () {
+        try {
+            this.salidaCocina.close();
+            this.entradaCocina.close();
+            this.serverCocina.close();
+            
+            this.conexionCocina.setCorre(false);
+            
+        } catch (IOException ex) { 
+            System.out.println(""+ex.getMessage());
+        }
+    }
+    
+    public void desconectarSimulacion () {
+        try {
+                //this.salidaSimulacion.close();
+            this.entradaSimulacion.close();
+            this.serverSimulacion.close();
+            
+            this.conexionSimulacion.setCorre(false);
+            
+        } catch (IOException ex) { 
+            System.out.println(""+ex.getMessage());
+        }
+        
     }
     
     public ServerSocket getServerSalon() {

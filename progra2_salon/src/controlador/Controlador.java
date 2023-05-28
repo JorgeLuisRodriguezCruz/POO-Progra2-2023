@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -39,7 +40,7 @@ public class Controlador implements ActionListener {
 
     public Controlador() {
         this.configuracion = new MenuConfiguracion();
-        this.menuSalon = new MenuSalon();
+        this.menuSalon = new MenuSalon(this);
         
         this.salon = new Salon();
         
@@ -60,6 +61,23 @@ public class Controlador implements ActionListener {
             
             this.conexion.start();
         } catch (Exception e){ }
+    }
+    
+    public void desconectar () {
+        Mensaje mensaje = new Mensaje(TipoMensaje.SALIDA, null);
+        
+        try {
+            this.conexion.setCorre(false);
+            this.salida.writeObject(mensaje);
+            this.salida.flush();
+            
+            this.salida.close();
+            this.entrada.close();
+            this.cliente.close();
+            
+        } catch (IOException ex) {
+            System.out.println(""+ex.getMessage());
+        }
     }
     
     private void escuchar (){
@@ -101,6 +119,7 @@ public class Controlador implements ActionListener {
         try {
             this.salida.writeObject(mensaje);
             this.salida.flush();
+            
         } catch (IOException ex) {
             System.out.println(""+ex.getMessage());
         }
@@ -116,6 +135,24 @@ public class Controlador implements ActionListener {
         this.actualizarPendientes();
         String texto = this.menuSalon.getOrdenesCompletadas().getText() + mesa.datosMesa();
         this.menuSalon.getOrdenesCompletadas().setText(texto);
+    }
+    
+    public void agregarOrden (Mesa mesaOrden) {
+        if (this.salon.getMesas().size() == 0){
+            JOptionPane.showMessageDialog(null, "No hay mesas disponibles", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        int num = new Random().nextInt( this.salon.getMesas().size() )+1;
+        
+        Mesa mesa = this.salon.getMesas().get(num);
+        this.salon.getMesas().remove(mesa);
+        
+        mesa.setProductos(mesaOrden.getProductos());
+        this.salon.getMesasOrdenEnviada().add(mesa);
+        
+        this.enviarMensaje(mesa);
+        this.actualizarPendientes();
     }
     
     @Override

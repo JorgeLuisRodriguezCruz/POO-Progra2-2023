@@ -1,6 +1,7 @@
 package compartido;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /*
  * @author rodri
@@ -116,6 +117,44 @@ public class FabricaHamburguesa {
         if (ingrediente.equals( Ingrediente.SALSA_DE_TOMATE.getNombre() ))
             return Ingrediente.SALSA_DE_TOMATE;
             
+        return null;
+    }
+    
+    public Ingrediente obtenerIngredienteAleatorio () {
+        int num = new Random ().nextInt(15)+1;
+        
+        switch (num){
+            case 1:
+                return Ingrediente.POLLO;
+            case 2:
+                return Ingrediente.HUEVO; 
+            case 3:
+                return Ingrediente.TOCINO;
+            case 4:
+                return Ingrediente.TOMATE; 
+            case 5:
+                return Ingrediente.CEBOLLA; 
+            case 6:
+                return Ingrediente.MOSTAZA; 
+            case 7:
+                return Ingrediente.LECHUGA; 
+            case 8:
+                return Ingrediente.MAYONESA; 
+            case 9:
+                return Ingrediente.PEPINILLOS; 
+            case 10:
+                return Ingrediente.CHAMPIÑONES; 
+            case 11:
+                return Ingrediente.CARNE_DE_RES; 
+            case 12:
+                return Ingrediente.QUESO_BLANCO; 
+            case 13:
+                return Ingrediente.CARNE_DE_CERDO; 
+            case 14:
+                return Ingrediente.QUESO_AMARILLO; 
+            case 15:
+                return Ingrediente.SALSA_DE_TOMATE; 
+        } 
         return null;
     }
     

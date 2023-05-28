@@ -1,8 +1,11 @@
 package vista;
 
+import controlador.Controlador;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +18,7 @@ import javax.swing.JTextField;
  * @author rodri
  */
 
-public class MenuCocina extends JFrame {
+public class MenuCocina extends JFrame implements WindowListener {
      
     private JLabel numeroMesa;
     private JLabel pendientes;
@@ -27,9 +30,13 @@ public class MenuCocina extends JFrame {
     
     private JTextArea ordenesSalida;
     private JScrollPane scrollOrdenesSalida;
+    
+    private Controlador controlador;
 
-    public MenuCocina() {
+    public MenuCocina(Controlador controlador) {
         super ("Menu cocina");
+        
+        this.controlador = controlador;
         
         this.numeroMesa = new JLabel("Numero de mesa:");
         this.pendientes = new JLabel("Ordenes pendientes");
@@ -45,6 +52,7 @@ public class MenuCocina extends JFrame {
         
         this.iniciarComponentes();
         this.iniciarVentana();
+        this.addWindowListener(this);
     }
     
     private void iniciarComponentes () {
@@ -100,6 +108,29 @@ public class MenuCocina extends JFrame {
     public JTextArea getOrdenesSalida() {
         return ordenesSalida;
     }
+
+    @Override
+    public void windowOpened(WindowEvent e) {}
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {}
+
+    @Override
+    public void windowIconified(WindowEvent e) {}
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {}
+
+    @Override
+    public void windowActivated(WindowEvent e) {}
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {}
     
     
 }

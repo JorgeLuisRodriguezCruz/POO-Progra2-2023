@@ -47,5 +47,9 @@ public class ConexionServer extends Thread {
             }
         }
     }
+
+    public void setCorre(boolean corre) {
+        this.corre = corre;
+    }
     
 }
