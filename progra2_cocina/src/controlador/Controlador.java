@@ -113,6 +113,7 @@ public class Controlador implements ActionListener {
         if (e.getSource() == this.menuCocina.getCompletar()){
             if(this.comprobarNumMesaEntrada()){
                 int numMesa = Integer.parseInt( this.menuCocina.getNumeroMesaEntrada().getText() );
+                //System.out.println("Entrada num = "+ numMesa);
                 Mesa mesa = this.cocina.obtenerMesa(numMesa);
                 if (mesa != null){
                     this.cocina.removerOrden(mesa);

@@ -8,21 +8,21 @@ import java.io.Serializable;
 
 public enum Ingrediente implements Serializable{
     
-    POLLO ("Pollo",14),
-    HUEVO ("Huevo",14),
-    TOCINO ("Tocino",14),
-    TOMATE ("Tomate",14),
-    CEBOLLA ("Cebolla",14),
-    MOSTAZA ("Mostaza",14),
-    LECHUGA ("Lechuga",14),
-    MAYONESA ("Mayonesa",14),
-    PEPINILLOS ("Pepinillos",14),
-    CHAMPIÑONES ("Champiñones",14),
-    CARNE_DE_RES ("Carne de res",14),
-    QUESO_BLANCO ("Queso blanco",14),
-    CARNE_DE_CERDO ("Carne de cerdo",14),
-    QUESO_AMARILLO ("Queso amarillo",14),
-    SALSA_DE_TOMATE ("Salsa de tomate",14);
+    POLLO ("Pollo",90),
+    HUEVO ("Huevo",40),
+    TOCINO ("Tocino",50),
+    TOMATE ("Tomate",22),
+    CEBOLLA ("Cebolla",22),
+    MOSTAZA ("Mostaza",10),
+    LECHUGA ("Lechuga",20),
+    MAYONESA ("Mayonesa",10),
+    PEPINILLOS ("Pepinillos",16),
+    CHAMPIÑONES ("Champiñones",18),
+    CARNE_DE_RES ("Carne de res",140),
+    QUESO_BLANCO ("Queso blanco",30),
+    CARNE_DE_CERDO ("Carne de cerdo",120),
+    QUESO_AMARILLO ("Queso amarillo",30),
+    SALSA_DE_TOMATE ("Salsa de tomate",10);
     
     private String nombre;
     private int precio;
