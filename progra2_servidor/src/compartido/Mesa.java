@@ -47,7 +47,8 @@ public class Mesa implements Serializable {
     public String datosMesa () {
         String datos = "\n-- Mesa #" + this.numero + " --\n";
         for (int i = 0; i < this.productos.size(); i++) { 
-            datos = datos + "\nHamburguesa: \n" + this.productos.get(i).ingredientes(); 
+            //datos = datos + "\nHamburguesa: \n" + this.productos.get(i).ingredientes(); 
+            datos = datos + "\nHamburguesa: \n" + this.productos.get(i).ingredientesDatos(); 
         }
         if (this.productos.size() == 0) {
             datos = datos + "\nSin productos agregados.";

@@ -49,6 +49,14 @@ public class Hamburguesa implements Serializable {
         return datos;
     }
     
+    public String ingredientesDatos () {
+        String datos = "";
+        for (int i = 0; i < this.ingredientes.size(); i++) {
+            datos = datos +"  "+ this.ingredientes.get(i).getNombre().toUpperCase() + "\n"; 
+        } 
+        return datos;
+    }
+    
     public String ingredientesFormatoDos () {
         String datos = "Ingredientes: \n";
         for (int i = 0; i < this.ingredientes.size(); i++) {
@@ -58,11 +66,11 @@ public class Hamburguesa implements Serializable {
     }
     
     public String preciosIngredientes (){
-        String datos = "\tIngredientes: ";
+        String datos = "";
         for (int i = 0; i < this.ingredientes.size(); i++) {
-            datos = datos + this.ingredientes.get(i).getNombre() + " - "; 
+            datos = datos + "  "+ this.ingredientes.get(i).getNombre() + "\n"; 
         }
-        datos = datos + "\n\tCosto: " + this.obtenerPrecio();
+        datos = datos + "  Costo: " + this.obtenerPrecio() + "\n";
         return datos;
     }
     

@@ -63,7 +63,7 @@ public class Salon {
         String datos = "";
         for (int i = 0; i < this.mesasOrdenEnviada.size(); i++) {
             if (this.mesasOrdenEnviada.get(i).getAtendida() == false)
-                datos = datos + this.mesasOrdenEnviada.get(i).datosMesa() + "\n\n";
+                datos = datos + this.mesasOrdenEnviada.get(i).datosMesa() + "\n";
         }
         return datos;
     }
