@@ -115,7 +115,12 @@ public class Controlador implements ActionListener {
     }
     
     private void enviarMensaje (Mesa mesa){
-        Mensaje mensaje = new Mensaje(TipoMensaje.ORDEN, mesa);
+        
+        Mesa mesaMensaje = new Mesa(mesa.getNumero());
+        mesaMensaje.copiarProductos(mesa.getProductos(), this.salon.getFrabrica());
+        
+        Mensaje mensaje = new Mensaje(TipoMensaje.ORDEN, mesaMensaje);
+        
         try {
             this.salida.writeObject(mensaje);
             this.salida.flush();
@@ -130,6 +135,8 @@ public class Controlador implements ActionListener {
     }
     
     public void completarOrdenMesaPendiente (int num) {
+        JOptionPane.showMessageDialog(null, "Se ha completado la orden de la mesa #"+num, "Notificacion", JOptionPane.INFORMATION_MESSAGE);
+        
         Mesa mesa = this.salon.obtenerMesaPendiente(num);
         mesa.setAtendida(true);
         this.actualizarPendientes();

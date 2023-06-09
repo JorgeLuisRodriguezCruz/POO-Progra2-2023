@@ -27,6 +27,13 @@ public class Mesa implements Serializable {
         this.productos.removeAll(productos);
     }
     
+    public void copiarProductos (ArrayList<Hamburguesa> productos, FabricaHamburguesa fabrica) {
+        for (int i = 0; i < productos.size(); i++) { 
+            fabrica.agregarIngredientes(productos.get(i).getIngredientes());
+            this.agregarProducto(fabrica.obtenerHamburguesaPersonalizada());
+        }
+    }
+    
     public int totalPagar () {
         int total = 0;
         for (int i = 0; i < this.productos.size(); i++) {

@@ -11,3 +11,4 @@ public class Main {
     }
     
 }
+// La idea es que llamamos al mismo objeto y este se serializa solo una vez
