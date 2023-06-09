@@ -87,6 +87,7 @@ public class Controlador implements ActionListener {
     }
     
     public void agregarOrden (Mesa mesa) {
+        JOptionPane.showMessageDialog(null, "Se agrega la orden de mesa #"+mesa.getNumero(), "Notificacion", JOptionPane.INFORMATION_MESSAGE);
         this.cocina.agregarOrden(mesa);
         this.actualizarOrdenes();
     }
