@@ -35,6 +35,7 @@ public class ConexionServer extends Thread {
                 switch(mensaje.getTipo()) {
                     case ORDEN:
                         System.out.println("Mensaje de orden"); 
+                        //System.out.println("Mensa:\n"+mensaje.getContenido().datosMesa());
                         this.controlador.agregarOrden( mensaje.getContenido() );
                         break;
                         
@@ -49,15 +50,6 @@ public class ConexionServer extends Thread {
                         System.out.println("Mensaje desconocido"); 
                         break;         
                 }
-                /*
-                Mensaje msj;
-                if (num == 40) {
-                    msj = new Mensaje(SALIDA, null); 
-                    this.corre = false;
-                } else
-                    msj = new Mensaje(ORDEN, null);
-                num++;
-                this.controlador.getSalida().writeObject(msj);*/
                 
                 
             } catch (InterruptedException ex) { 
